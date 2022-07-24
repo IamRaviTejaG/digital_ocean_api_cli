@@ -1,8 +1,8 @@
 # Deletion logic for droplets
 
 import requests
-from config.constants import (DIGITAL_OCEAN_API_BASE_URL,
-                              DIGITAL_OCEAN_API_HEADERS)
+from config.constants import (DIGITAL_OCEAN_API_HEADERS,
+                              DIGITAL_OCEAN_DROPLETS_URL)
 from simple_term_menu import TerminalMenu
 
 from .view import get_droplet_fields, get_droplets
@@ -16,7 +16,7 @@ def delete_droplets(droplets_to_delete):
         res = str(input(f"{s1}\n\nDetails:\n{s2}\n\n{s3}"))
 
         if (res.lower() == 'y'):
-            delete_droplet_url = f"{DIGITAL_OCEAN_API_BASE_URL}/droplets/{droplet['id']}"
+            delete_droplet_url = f"{DIGITAL_OCEAN_DROPLETS_URL}/{droplet['id']}"
             response = requests.request("DELETE", delete_droplet_url, headers=DIGITAL_OCEAN_API_HEADERS)
             if (response.status_code == 204):
                 print(f"Successfully deleted droplet. ID: {droplet['id']}\n")

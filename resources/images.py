@@ -1,14 +1,14 @@
 import json
 
 import requests
-from config.constants import (DIGITAL_OCEAN_API_BASE_URL,
-                              DIGITAL_OCEAN_API_HEADERS,
+from config.constants import (DIGITAL_OCEAN_API_HEADERS,
+                              DIGITAL_OCEAN_IMAGES_URL,
                               IMAGE_SLUGS_FIELD_NAMES)
 from utils.printer import print_table
 
 
 def get_images():
-    images_url = f"{DIGITAL_OCEAN_API_BASE_URL}/images?page=1&per_page=1000"
+    images_url = f"{DIGITAL_OCEAN_IMAGES_URL}?page=1&per_page=1000"
     response = requests.request("GET", images_url, headers=DIGITAL_OCEAN_API_HEADERS)
     images_data = json.loads(response.text)
     return images_data['images']

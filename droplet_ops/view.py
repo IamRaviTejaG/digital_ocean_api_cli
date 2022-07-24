@@ -4,8 +4,8 @@ import json
 from typing import List
 
 import requests
-from config.constants import (DIGITAL_OCEAN_API_BASE_URL,
-                              DIGITAL_OCEAN_API_HEADERS,
+from config.constants import (DIGITAL_OCEAN_API_HEADERS,
+                              DIGITAL_OCEAN_DROPLETS_URL,
                               DROPLET_VIEW_FIELD_NAMES)
 from utils.droplet_filters import get_network_ipv4_public
 from utils.printer import print_table
@@ -13,8 +13,7 @@ from utils.view_droplet_utils import get_views_table_rows
 
 
 def get_droplets() -> List[dict]:
-    droplets_url = f"{DIGITAL_OCEAN_API_BASE_URL}/droplets"
-    response = requests.request("GET", droplets_url, headers=DIGITAL_OCEAN_API_HEADERS)
+    response = requests.request("GET", DIGITAL_OCEAN_DROPLETS_URL, headers=DIGITAL_OCEAN_API_HEADERS)
     droplets_data = json.loads(response.text)
     return droplets_data['droplets']
 

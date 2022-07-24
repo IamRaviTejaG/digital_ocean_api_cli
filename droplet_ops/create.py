@@ -4,15 +4,15 @@ import json
 from typing import Any, List
 
 import requests
-from config.constants import (DIGITAL_OCEAN_API_BASE_URL,
-                              DIGITAL_OCEAN_API_HEADERS,
+from config.constants import (DIGITAL_OCEAN_API_HEADERS,
+                              DIGITAL_OCEAN_DROPLETS_URL,
                               DROPLET_VIEW_FIELD_NAMES)
 from resources.images import get_images
 from resources.regions import get_active_regions
 from resources.sizes import get_sizes
+from resources.ssh_keys import get_user_ssh_keys
 from utils.menu_generator import generate_menu
 from utils.printer import print_table
-from utils.ssh_utils import get_user_ssh_keys
 from utils.view_droplet_utils import get_views_table_rows
 
 
@@ -80,8 +80,9 @@ def __create_droplets(names: List[str], image_slug: str, region_slug: str,
         "ssh_keys": ssh_keys
     }
 
-    droplets_url = f"{DIGITAL_OCEAN_API_BASE_URL}/droplets"
-    response = requests.request("POST", droplets_url, headers=DIGITAL_OCEAN_API_HEADERS, json=droplets)
+    response = requests.request("POST", DIGITAL_OCEAN_DROPLETS_URL, 
+                                headers=DIGITAL_OCEAN_API_HEADERS,
+                                json=droplets)
 
     if (response.status_code == 202):
         droplets_data = json.loads(response.text)

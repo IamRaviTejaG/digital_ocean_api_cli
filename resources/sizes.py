@@ -2,13 +2,13 @@ import json
 
 import requests
 from config.constants import (DIGITAL_OCEAN_API_BASE_URL,
-                              DIGITAL_OCEAN_API_HEADERS,
+                              DIGITAL_OCEAN_API_HEADERS, DIGITAL_OCEAN_SIZES_URL,
                               SIZE_SLUGS_FIELD_NAMES)
 from utils.printer import print_table
 
 
 def get_sizes():
-    sizes_url = f"{DIGITAL_OCEAN_API_BASE_URL}/sizes?page=1&per_page=1000"
+    sizes_url = f"{DIGITAL_OCEAN_SIZES_URL}?page=1&per_page=1000"
     response = requests.request("GET", sizes_url, headers=DIGITAL_OCEAN_API_HEADERS)
     sizes_data = json.loads(response.text)
     return sizes_data['sizes']
