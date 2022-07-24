@@ -20,4 +20,4 @@ IMAGE_SLUGS_FIELD_NAMES = ["ID", "Name", "Distribution", "Slug", "Type", "Public
 REGION_SLUGS_FIELD_NAMES = ["Name", "Slug", "Availability", "Features"]
 SIZE_SLUGS_FIELD_NAMES = ["Slug", "Description", "Mem (MB)", "vCPUs", "Disk", "Network", "Price ($/Hour)", "Price ($/Month)", "Available", "Regions"]
 
-MENU_OPTIONS = ["Create droplet(s)", "Delete droplet(s)", "View droplet(s)", "View image slugs", "View region slugs", "View size slugs", "Exit"]
+MENU_OPTIONS = ["1. Create droplet(s)", "2. Delete droplet(s)", "3. View droplet(s)", "4. View image slugs", "5. View region slugs", "6. View size slugs", "7. Exit"]
