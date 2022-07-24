@@ -1,6 +1,7 @@
 # Logic for listing droplets
 
 import json
+from typing import List
 
 import requests
 from config.constants import (DIGITAL_OCEAN_API_BASE_URL,
@@ -8,9 +9,10 @@ from config.constants import (DIGITAL_OCEAN_API_BASE_URL,
                               DROPLET_VIEW_FIELD_NAMES)
 from utils.droplet_filters import get_network_ipv4_public
 from utils.printer import print_table
+from utils.view_droplet_utils import get_views_table_rows
 
 
-def get_droplets():
+def get_droplets() -> List[dict]:
     droplets_url = f"{DIGITAL_OCEAN_API_BASE_URL}/droplets"
     response = requests.request("GET", droplets_url, headers=DIGITAL_OCEAN_API_HEADERS)
     droplets_data = json.loads(response.text)
@@ -23,37 +25,9 @@ def view_droplets():
         print("No droplets found!")
         return
 
-    rows = []
+    print_table(DROPLET_VIEW_FIELD_NAMES, get_views_table_rows(droplets))
 
-    for droplet in droplets:
-        row = []
-        row.append(droplet['id'])
-        row.append(get_network_ipv4_public(droplet['networks']))
-        row.append(droplet['name'])
-        row.append(droplet['created_at'])
-        row.append(droplet['status'])
-        row.append(droplet['image']['distribution'])
-        row.append(droplet['image']['id'])
-        row.append(droplet['image']['slug'])
-        row.append(droplet['size']['slug'])
-        row.append(droplet['region']['slug'])
-        row.append(','.join(droplet['tags']))
-        row.append(droplet['vpc_uuid'])
-        rows.append(row)
-
-    print_table(DROPLET_VIEW_FIELD_NAMES, rows)
-
-def get_droplet_id_ip():
-    droplets = get_droplets()
-    ips = {}
-
-    for droplet in droplets:
-        droplet_details = get_droplet_fields(droplet, 'id', 'ip')
-        ips[droplet_details['id']] = droplet_details['ip']
-
-    return ips
-
-def get_droplet_fields(droplet_object, *args):
+def get_droplet_fields(droplet_object: dict, *args) -> dict:
     droplet_details = {}
 
     if 'id' in args:

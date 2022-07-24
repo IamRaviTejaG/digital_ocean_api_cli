@@ -27,3 +27,9 @@ def view_region_slugs():
         rows.append(row)
     
     print_table(REGION_SLUGS_FIELD_NAMES, rows)
+
+
+def get_active_regions():
+    all_regions = get_regions()
+    active_regions = [region for region in all_regions if region['available'] == True]
+    return active_regions

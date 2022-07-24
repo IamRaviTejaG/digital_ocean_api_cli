@@ -1,6 +1,6 @@
 # Contains custom filters for filtering droplets based on a specific condition
 
-def get_network_ipv4_public(network):
+def get_network_ipv4_public(network: dict) -> str:
     """
     Expects an object similar to this. Would break otherwise, please exercise
     caution while changing this.
@@ -28,9 +28,10 @@ def get_network_ipv4_public(network):
 
     if 'v4' in network:
         public_ipv4 = list(filter(__get_public_ipv4, network['v4']))
-        ipv4 = public_ipv4[0]['ip_address']
+        if len(public_ipv4):
+            ipv4 = public_ipv4[0]['ip_address']
     
     return ipv4
 
-def __get_public_ipv4(ipv4_network_object):
+def __get_public_ipv4(ipv4_network_object: dict) -> bool:
     return ipv4_network_object['type'] == 'public'
