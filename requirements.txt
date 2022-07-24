@@ -1,0 +1,3 @@
+prettytable
+requests
+simple_term_menu
