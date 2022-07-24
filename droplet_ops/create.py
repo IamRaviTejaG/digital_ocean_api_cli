@@ -85,7 +85,7 @@ def __create_droplets(names: List[str], image_slug: str, region_slug: str,
 
     if (response.status_code == 202):
         droplets_data = json.loads(response.text)
-        print_table(DROPLET_VIEW_FIELD_NAMES, get_views_table_rows(droplets_data))
+        print_table(DROPLET_VIEW_FIELD_NAMES, get_views_table_rows(droplets_data['droplets']))
     elif (response.status_code == 401):
         print('Authorization error')
     elif (response.status_code == 429):
