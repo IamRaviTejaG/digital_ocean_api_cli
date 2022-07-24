@@ -1,6 +1,13 @@
+# Generates terminal menu based on the given inputs
+
+from typing import Any, List, Optional
 from simple_term_menu import TerminalMenu
 
-def generate_menu(menu_options, title=None, multi=False, search_key=None, search_preview_text=False):
+def generate_menu(menu_options: List[str],
+                  title: Optional[Any] = None,
+                  multi: Optional[Any] = False,
+                  search_key: Optional[Any] = None,
+                  search_preview_text: Optional[Any] = False) -> Any:
     menu = TerminalMenu(
         menu_options,
         title=title,
