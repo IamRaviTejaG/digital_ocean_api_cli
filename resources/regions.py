@@ -1,8 +1,7 @@
 import json
 
 import requests
-from config.constants import (DIGITAL_OCEAN_API_BASE_URL,
-                              DIGITAL_OCEAN_API_HEADERS, DIGITAL_OCEAN_REGIONS_URL,
+from config.constants import (DIGITAL_OCEAN_API_HEADERS, DIGITAL_OCEAN_REGIONS_URL,
                               REGION_SLUGS_FIELD_NAMES)
 from utils.printer import print_table
 
