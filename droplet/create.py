@@ -35,9 +35,10 @@ def create_droplets_selector():
 
     # Select region slug menu
     regions = get_active_regions()
-    region_slugs_list = [region['slug'] for region in regions]
+    region_slugs = [region['slug'] for region in regions]
+    region_slugs_list = [f"{region['slug']} ({region['name']})" for region in regions]
     region_slug_idx = generate_menu(region_slugs_list, title="Select region slug", search_preview_text=True)
-    region_slug = region_slugs_list[region_slug_idx]
+    region_slug = region_slugs[region_slug_idx]
     print(f'Selected region slug: {region_slug}')
 
     # Select size slug menu

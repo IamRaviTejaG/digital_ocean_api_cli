@@ -1,9 +1,9 @@
 # Driver to handle the Digital Ocean API -> CLI utility
 
 from config.constants import MENU_OPTIONS
-from droplet_ops.create import create_droplets_selector
-from droplet_ops.delete import delete_droplet_selector
-from droplet_ops.view import view_droplets
+from droplet.create import create_droplets_selector
+from droplet.delete import delete_droplet_selector
+from droplet.view import view_droplets
 from resources.images import view_image_slugs
 from resources.regions import view_region_slugs
 from resources.sizes import view_size_slugs
