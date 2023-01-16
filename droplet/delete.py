@@ -5,6 +5,7 @@ from typing import List
 import requests
 from config.constants import (DIGITAL_OCEAN_API_HEADERS,
                               DIGITAL_OCEAN_DROPLETS_URL)
+from config.http_status import HttpStatus
 from utils.menu_generator import generate_menu
 
 from .view import get_droplet_fields, get_droplets
@@ -40,10 +41,10 @@ def __delete_droplets(droplets_to_delete: List[dict]) -> None:
         s3 = "Enter Y/N: "
         res = str(input(f"{s1}\n\nDetails:\n{s2}\n\n{s3}"))
 
-        if (res.lower() == 'y'):
+        if (res.lower() in ['y', 'yes']):
             delete_droplet_url = f"{DIGITAL_OCEAN_DROPLETS_URL}/{droplet['id']}"
             response = requests.request("DELETE", delete_droplet_url, headers=DIGITAL_OCEAN_API_HEADERS)
-            if (response.status_code == 204):
+            if (response.status_code == HttpStatus.NO_CONTENT):
                 print(f"Successfully deleted droplet. ID: {droplet['id']}\n")
             else:
                 print(f"Failed to delete droplet. ID: {droplet['id']}\n")

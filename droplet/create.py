@@ -7,6 +7,7 @@ import requests
 from config.constants import (DIGITAL_OCEAN_API_HEADERS,
                               DIGITAL_OCEAN_DROPLETS_URL,
                               DROPLET_VIEW_FIELD_NAMES)
+from config.http_status import HttpStatus
 from resources.images import get_images
 from resources.regions import get_active_regions
 from resources.sizes import get_sizes
@@ -85,14 +86,14 @@ def __create_droplets(names: List[str], image_slug: str, region_slug: str,
                                 headers=DIGITAL_OCEAN_API_HEADERS,
                                 json=droplets)
 
-    if (response.status_code == 202):
+    if (response.status_code == HttpStatus.ACCEPTED):
         droplets_data = json.loads(response.text)
         print_table(DROPLET_VIEW_FIELD_NAMES, get_views_table_rows(droplets_data['droplets']))
-    elif (response.status_code == 401):
+    elif (response.status_code == HttpStatus.UNAUTHORIZED):
         print('Authorization error')
-    elif (response.status_code == 429):
+    elif (response.status_code == HttpStatus.TOO_MANY_REQUESTS):
         print('API Rate Limit exceeded')
-    elif (response.status_code == 500):
+    elif (response.status_code == HttpStatus.INTERNAL_SERVER_ERROR):
         print('Server side error')
     else:
         print(json.loads(response.text))
