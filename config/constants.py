@@ -1,12 +1,11 @@
 # Contains all the constants required throughout the project.
-
-DIGITAL_OCEAN_API_KEY = 'DIGITAL_OCEAN_API_KEY'
+import os
 
 DIGITAL_OCEAN_API_BASE_URL = "https://api.digitalocean.com/v2"
 
 DIGITAL_OCEAN_API_HEADERS = {
   'Content-Type': 'application/json',
-  'Authorization': f'Bearer {DIGITAL_OCEAN_API_KEY}'
+  'Authorization': f'Bearer {os.environ.get("DIGITAL_OCEAN_API_KEY")}'
 }
 
 DIGITAL_OCEAN_DROPLETS_URL = f"{DIGITAL_OCEAN_API_BASE_URL}/droplets"
